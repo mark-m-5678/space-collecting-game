@@ -1,5 +1,5 @@
 # SPACE COLLECTOR
-*Coursework "collecting game"*
+Originally made as a uni asignment. Yes I know that the name is terrible.
 
 ## https://github.com/aubergine5678/
 
