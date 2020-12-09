@@ -1,5 +1,3 @@
-// Enums in a separate file for code readability:
-
 // "gameState" enum to determine if the game is on the start screen, playing, or over
 public enum GameState {
   START_SCREEN, 
@@ -9,8 +7,8 @@ public enum GameState {
 
 // "direction" enum used when moving the player ship on the screen
 public enum Direction {
-  UP,
-  DOWN,
-  LEFT,
+  UP, 
+  DOWN, 
+  LEFT, 
   RIGHT
 }

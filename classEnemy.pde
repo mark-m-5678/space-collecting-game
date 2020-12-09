@@ -1,28 +1,21 @@
 // Enemy class
-// Enemies will move towards the player and colliding with them takes away health
+// Enemies move towards the player and colliding with them takes away health
 
-class Enemy {
+class Enemy extends Spaceship {
   
-  float posX, posY, speed;
-  int shipWidth, shipHeight, counter;
-  boolean debugMode;
-  PImage img1, img2, img3, img4;
-  PVector v; // Vector for movement
+  // Enemy ship is animated from a sequence of 4 images:
+  private PImage img1, img2, img3, img4;
+  private PVector v; // Movement vector
 
-  Enemy(int posX, int posY, boolean debugMode) {
-    // Debug mode
-    this.debugMode = debugMode;
+  // Constructor
+  Enemy(int startingPosX, int startingPosY) {
+    super(startingPosX, startingPosY);
 
-    // Ship dimensions
-    this.shipWidth = 170/2;
-    this.shipHeight = 122/2;
+    // Set the enemy ship dimensions
+    this.setDimensions(170/2, 122/2);
 
-    // Starting position
-    this.posX = posX;
-    this.posY = posY;
-
-    // Ship speed
-    this.speed = 0.5;
+    // Enemy speed
+    this.speed = 0.7;
 
     // Load and resize the ship images
     this.img1 = loadImage("img/enemy/enemy_ship_1.png");
@@ -35,7 +28,7 @@ class Enemy {
     img4.resize(this.shipWidth, this.shipHeight);
   }
 
-  void update() {
+  public void update() {
     if (this.counter < 10) { 
       image(this.img1, this.posX, this.posY);
     } else if (counter < 20) { 
@@ -63,16 +56,12 @@ class Enemy {
     }
   }
 
-  void move(Player player) {
+  public void move(Player player) {
     // Move the enemy towards the player (this is probably quite inefficient but... it works! Maybe the maths in CSF really wasn't that uselsess)
-
-    // Get the current co-ordinates of the player ship
-    int playerX = player.posX;
-    int playerY = player.posY;
 
     // Create a PVector from the co-ordinates of the player and enemy positions
     // This is based on the formula: u(x,y) = (x2-x1, y2-y1)
-    this.v = new PVector(playerX - this.posX, playerY - this.posY);
+    this.v = new PVector(player.posX - this.posX, player.posY - this.posY);
 
     // Normalise the vector (make its magnitude = 1)
     v.normalize();
@@ -80,7 +69,7 @@ class Enemy {
     // Multiply the vector by the speed
     v.mult(speed);
 
-    // Store the newly calculated coordinates in an array (there's no way to just access them directly as far as I can tell)
+    // Store the newly calculated coordinates in an array
     float[] newPos = v.array();
 
     // Find the final new position (calculated vector + original co-ordinates)
@@ -92,7 +81,7 @@ class Enemy {
     this.posY = newPos[1];
   }
 
-  boolean hitPlayer(Player playerShip) {
+  public boolean hitPlayer(Player playerShip) {
     // A method that returns if the enemy hit the player ship
     // The expression is checking if the two ships are NOT colliding, I found it to be easier
     if (this.posX+this.shipWidth<playerShip.posX || playerShip.posX+playerShip.shipWidth<this.posX || this.posY+this.shipHeight<playerShip.posY || playerShip.posY+playerShip.shipHeight<this.posY) {

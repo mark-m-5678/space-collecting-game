@@ -2,12 +2,12 @@
 
 class HealthCounter {
   
-  int posX, posY, currentHealth, imgWidth, imgHeight;
-  PImage img0, img1, img2, img3, img4, img5, img6;
-  boolean debugMode;
+  public int imgWidth, imgHeight;
+  private int currentHealth;
+  private float posX, posY;
+  private PImage img0, img1, img2, img3, img4, img5, img6;
 
-  HealthCounter(boolean debugMode) {
-    this.debugMode = debugMode;
+  HealthCounter() {
 
     // Image dimensions
     this.imgWidth = 233;
@@ -37,7 +37,7 @@ class HealthCounter {
     img6.resize(this.imgWidth, this.imgHeight);
   }
 
-  void display() {
+  public void display() {
     switch(this.currentHealth) {
     case 0:
       // No HP remaining
@@ -82,4 +82,13 @@ class HealthCounter {
       rect(this.posX, this.posY, this.imgWidth, this.imgHeight);
     }
   }
+  
+  public int getHealth() {
+    return this.currentHealth;
+  }
+  
+  public void addDamage(int damage) {
+    this.currentHealth -= damage;
+  }
+  
 }

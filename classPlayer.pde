@@ -1,25 +1,19 @@
 // Player class
 // Player can move up, down, left and right
-// The player ship is animated from a 6 image sequence
 
-class Player {
-  
-  int posX, posY, moveSpeed, counter, shipWidth, shipHeight;
-  boolean debugMode;
-  PImage img1, img2, img3, img4, img5, img6;
+class Player extends Spaceship {
 
-  Player (int startingPosX, int startingPosY, boolean debugMode) {
-    this.debugMode = debugMode;
+  // Player ship is animated from a sequence of 6 images:
+  private PImage img1, img2, img3, img4, img5, img6;
 
-    this.posX = startingPosX;
-    this.posY = startingPosY;
+  Player (int startingPosX, int startingPosY) {
+    super(startingPosX, startingPosY);
 
     // How far the player ship moves in one button press:
-    this.moveSpeed = 20;
+    this.speed = 20;
 
     // Dimensions of the player ship:
-    this.shipWidth = 91;
-    this.shipHeight = 145;
+    this.setDimensions(91, 145);
 
     // Load and resize the ship images
     this.img1 = loadImage("img/player/player_ship_1.png");
@@ -36,10 +30,10 @@ class Player {
     img6.resize(this.shipWidth, this.shipHeight);
   }
 
-  void update() {
+  public void update() {
     if (this.counter < 10) { 
       image(this.img1, this.posX, this.posY);
-    } else if (counter < 20) { 
+    } else if (this.counter < 20) { 
       image(this.img2, this.posX, this.posY);
     } else if (this.counter < 30) { 
       image(this.img3, this.posX, this.posY);
@@ -53,7 +47,7 @@ class Player {
       image(this.img6, this.posX, this.posY);
       this.counter = 0;
     }
-    
+
     // Iterate the counter
     this.counter++;
 
@@ -68,23 +62,23 @@ class Player {
     }
   }
 
-  void move(Direction moveDirection) {
+  public void move(Direction moveDirection) {
     switch(moveDirection) {
     case UP:
       // Move UP
-      posY -= moveSpeed;
+      posY -= this.speed;
       break;
     case RIGHT:
       // Move RIGHT
-      posX += moveSpeed;
+      posX += this.speed;
       break;
     case DOWN:
       // Move DOWN
-      posY += moveSpeed;
+      posY += this.speed;
       break;
     case LEFT:
       // Move LEFT
-      posX -= moveSpeed;
+      posX -= this.speed;
       break;
     }
   }

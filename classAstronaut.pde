@@ -2,12 +2,10 @@
 
 class Astronaut {
   
-  int posX, posY, imgWidth, imgHeight;
-  boolean debugMode;
-  PImage img;
+  private int posX, posY, imgWidth, imgHeight;
+  private PImage img;
 
-  Astronaut (boolean debugMode) {
-    this.debugMode = debugMode;
+  Astronaut () {
 
     // Image dimensions
     this.imgWidth = 377/8;
@@ -22,7 +20,7 @@ class Astronaut {
     img.resize(this.imgWidth, this.imgHeight);
   }
 
-  void display() {
+  public void display() {
     image(this.img, this.posX, this.posY);
     if (debugMode) {
       // Debug mode stuff
@@ -35,7 +33,7 @@ class Astronaut {
     }
   }
 
-  boolean saved(Player playerShip) {
+  public boolean saved(Player playerShip) {
     // Method that returns if the astronaut has been saved by the player ship
 
     if (this.posX+this.imgWidth<playerShip.posX || playerShip.posX+playerShip.shipWidth<this.posX || this.posY+this.imgHeight<playerShip.posY || playerShip.posY+playerShip.shipHeight<this.posY) {

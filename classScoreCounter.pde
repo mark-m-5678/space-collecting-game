@@ -2,12 +2,12 @@
 
 class ScoreCounter {
   
-  int posX, posY, fontSize, currentScore;
-  boolean debugMode;
+  public float posX, posY;
+  public int fontSize;
+  private int currentScore;
 
   // Constructor
-  ScoreCounter(boolean debugMode) {
-    this.debugMode = debugMode;
+  ScoreCounter() {
 
     // Font size and location
     fontSize = 36;
@@ -18,9 +18,17 @@ class ScoreCounter {
     currentScore = 0;
   }
 
-  void display() {
+  public void display() {
     // Display the score
     textSize(fontSize);
     text("SCORE: " + currentScore, posX, posY);
+  }
+
+  public int getScore() {
+    return this.currentScore;
+  }
+  
+  public void addScore(int amount) {
+    this.currentScore += amount;
   }
 }
